@@ -2,6 +2,8 @@
 
 This is repository for frontend for RecoFach application.
 
+![Frontend poster](public/poster.png)
+
 ## Project setup
 
 To install and run this repo locally for development
