@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-    </div>
+    </div> -->
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>
@@ -19,13 +19,7 @@
   color: #2c3e50;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.75s ease;
-}
-
-.fade-enter-from,
-.fade-leave-active {
-  opacity: 0;
+body {
+  margin: 0;
 }
 </style>
