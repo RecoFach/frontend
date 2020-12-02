@@ -8,31 +8,7 @@
           Don't have an account?
           <el-link href="/about" type="primary" target="_blank"> Create new one! </el-link>
         </p>
-        <el-form label-position="top" :model="form">
-          <el-form-item
-            prop="email"
-            label="E-Mail"
-            :autocomplete="autoComplete"
-            :rules="form.rules.email"
-            class="is-no-asterisk"
-          >
-            <el-input v-model="form.email" type="email"></el-input>
-          </el-form-item>
-          <el-form-item
-            prop="password"
-            label="Password"
-            :rules="form.rules.password"
-            class="is-no-asterisk"
-          >
-            <el-input
-              v-model="form.password"
-              :autocomplete="autoComplete"
-              :showPassword="showPassword"
-              type="password"
-            ></el-input>
-          </el-form-item>
-          <el-button type="primary" @click="onSubmit">Login</el-button>
-        </el-form>
+        <login-form />
       </el-card>
     </el-row>
   </el-main>
@@ -40,34 +16,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import LoginForm from '@/components/forms/Login.vue';
 
 export default Vue.extend({
   name: 'Login',
-  data() {
-    return {
-      showPassword: true,
-      autoComplete: true,
-      form: {
-        email: '',
-        password: '',
-        rules: {
-          email: [
-            { required: true, message: 'Please input email address', trigger: 'blur' },
-            {
-              type: 'email',
-              message: 'Please input correct email address',
-              trigger: ['blur', 'change']
-            }
-          ],
-          password: { required: true, message: 'Please input your password', trigger: 'blur' }
-        }
-      }
-    };
-  },
-  methods: {
-    onSubmit() {
-      console.log('submit!');
-    }
+  components: {
+    LoginForm
   }
 });
 </script>
