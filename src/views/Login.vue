@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <h1>This is an about page</h1>
+    <h1>This is an login page</h1>
   </div>
 </template>
 
@@ -9,8 +9,16 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'Login',
-  components: {
-
-  },
+  data() {
+    return {
+      showNav: true
+    };
+  }
 });
 </script>
+
+<style lang="scss">
+a {
+  text-decoration: none;
+}
+</style>
