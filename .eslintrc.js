@@ -9,9 +9,10 @@ module.exports = {
     'plugin:vue/essential',
     'plugin:prettier/recommended'
   ],
-  
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'object-curly-newline': 'off',
+    'no-unused-vars': 'off'
   },
 };

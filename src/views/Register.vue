@@ -5,10 +5,10 @@
         <img src="@/assets/logo.png" width="100" align="center" />
         <h1>Welcome to RecoFach!</h1>
         <p>
-          Don't have an account?
-          <el-link href="/about" type="primary" target="_blank"> Create new one! </el-link>
+          Already have an account?
+          <el-link href="/login" type="primary" target="_blank"> Login here! </el-link>
         </p>
-        <login-form />
+        <register-form />
       </el-card>
     </el-row>
   </el-main>
@@ -16,12 +16,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import LoginForm from '@/components/forms/Login.vue';
+import RegisterForm from '@/components/forms/Register.vue';
 
 export default Vue.extend({
-  name: 'Login',
+  name: 'Register',
   components: {
-    LoginForm,
+    RegisterForm,
   },
 });
 </script>
