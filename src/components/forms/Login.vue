@@ -65,7 +65,13 @@ export default Vue.extend({
           email,
           password,
         })
-        .then((response) => console.log(response.data));
+        .then((response) => {
+          localStorage.setItem('user', JSON.stringify(response.data));
+          window.location.href = '/';
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
     },
   },
 });

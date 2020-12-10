@@ -1,18 +1,24 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <div class="button-container">
+      <a href="/settings">Settings</a>
+      <br />
+    </div>
+    <el-button type="primary" @click="onSubmit">Logout</el-button>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 
 export default Vue.extend({
   name: 'Home',
-  components: {
-    HelloWorld
-  }
+  methods: {
+    onSubmit(submitEvent: any) {
+      localStorage.removeItem('user');
+      window.location.href = '/login';
+    },
+  },
 });
 </script>
