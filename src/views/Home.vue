@@ -15,10 +15,10 @@ import Vue from 'vue';
 export default Vue.extend({
   name: 'Home',
   methods: {
-    onSubmit(submitEvent: any) {
+    onSubmit() {
       localStorage.removeItem('user');
       window.location.href = '/login';
-    },
-  },
+    }
+  }
 });
 </script>

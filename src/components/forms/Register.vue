@@ -1,31 +1,13 @@
 <template>
-  <el-form label-position="top" :model="form">
+  <el-form label-position="top" :model="form" ref="form">
     <el-form-item
-      prop="email"
-      label="E-Mail"
-      :autocomplete="autoComplete"
-      :rules="form.rules.email"
+      prop="username"
+      label="Username"
+      auto-complete="off"
+      :rules="form.rules.username"
       class="is-no-asterisk"
     >
-      <el-input v-model="form.email" type="email" ref="email"></el-input>
-    </el-form-item>
-    <el-form-item
-      prop="firstname"
-      label="First Name"
-      :autocomplete="autoComplete"
-      :rules="form.rules.firstname"
-      class="is-no-asterisk"
-    >
-      <el-input v-model="form.firstname" type="string" ref="firstname"></el-input>
-    </el-form-item>
-    <el-form-item
-      prop="lastname"
-      label="Last Name"
-      :autocomplete="autoComplete"
-      :rules="form.rules.lastname"
-      class="is-no-asterisk"
-    >
-      <el-input v-model="form.lastname" type="string" ref="lastname"></el-input>
+      <el-input v-model="form.username" type="text" ref="text"></el-input>
     </el-form-item>
     <el-form-item
       prop="password"
@@ -35,13 +17,27 @@
     >
       <el-input
         v-model="form.password"
-        :autocomplete="autoComplete"
         :showPassword="showPassword"
         type="password"
         ref="password"
       ></el-input>
     </el-form-item>
-    <el-button type="primary" @click="onSubmit">Register</el-button>
+    <el-form-item
+      prop="passwordConfirm"
+      label="Confirm password"
+      auto-complete="off"
+      :rules="form.rules.passwordConfirm"
+      class="is-no-asterisk"
+    >
+      <el-input
+        v-model="form.passwordConfirm"
+        :showPassword="showPassword"
+        auto-complete="off"
+        type="password"
+        ref="password"
+      ></el-input>
+    </el-form-item>
+    <el-button type="primary" @click="onSubmit('form')">Sign Up</el-button>
   </el-form>
 </template>
 
@@ -52,50 +48,75 @@ import axios from 'axios';
 export default Vue.extend({
   name: 'RegisterCF',
   data() {
+    const validatePass = (rule: Record<string, unknown>, value: string, callback: Function) => {
+      if (value === '') {
+        callback(new Error('Please input your password again'));
+      } else if (value !== this.$data.form.password) {
+        callback(new Error("Passwords doesn't match!"));
+      } else {
+        callback();
+      }
+    };
     return {
       showPassword: true,
       autoComplete: 'true',
       form: {
-        email: '',
+        username: '',
         password: '',
-        firstname: '',
-        lastname: '',
+        passwordConfirm: '',
         rules: {
-          email: [
-            { required: true, message: 'Please input email address', trigger: 'blur' },
-            {
-              type: 'email',
-              message: 'Please input correct email address',
-              trigger: ['blur', 'change'],
-            },
-          ],
+          username: { required: true, message: 'Please input a username', trigger: 'blur' },
           password: { required: true, message: 'Please input your password', trigger: 'blur' },
-          firstname: { required: true, message: 'Please input your first name', trigger: 'blur' },
-          lastname: { required: true, message: 'Please input your last name', trigger: 'blur' },
-        },
-      },
+          passwordConfirm: {
+            required: true,
+            validator: validatePass,
+            trigger: 'blur'
+          }
+        }
+      }
     };
   },
   methods: {
-    onSubmit(submitEvent: any) {
+    onSubmit() {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const elform: any = this.$refs.form;
+      console.log(typeof elform);
+      elform.validate((valid: boolean) => {
+        if (valid) {
+          console.log('Submiting valid form..');
+          this.sendForm();
+        } else {
+          console.log('Form is not valid');
+        }
+      });
+    },
+
+    sendForm() {
       const {
-        form: { email, password, firstname, lastname },
+        form: { username, password }
       } = this.$data;
 
+      const BACKEND = `${process.env.VUE_APP_API_URL}:${process.env.VUE_APP_API_PORT}`;
+
       axios
-        .put('http://localhost:8080/users', {
-          email,
-          password,
-          firstname,
-          lastname,
-        })
+        .put(`${BACKEND}/users/signup`, { username, password }, { headers: {} })
         .then((response) => {
-          window.location.href = '/login';
+          console.log(response);
+          this.$message.success({
+            message: `Congrats, ${response.data.username}, your account was created!`,
+            duration: 5000,
+            showClose: true
+          });
         })
         .catch((e) => {
-          alert(e.message);
+          this.$message.error({
+            message: 'Sorry, this username was already taken :(',
+            duration: 5000,
+            showClose: true
+          });
+          console.log(e.message);
         });
-    },
-  },
+    }
+  }
 });
 </script>

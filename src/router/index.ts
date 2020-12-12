@@ -1,39 +1,37 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
-import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
-import Settings from '../views/Settings.vue';
-import Register from '../views/Register.vue';
+import SignUp from '../views/SignUp.vue';
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'Login',
+    component: Login
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login,
+    component: Login
   },
   {
-    path: '/settings',
-    name: 'Settings',
-    component: Settings,
+    path: '/signup',
+    name: 'Sign Up',
+    component: SignUp
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: Register,
-  },
+    path: '/home',
+    name: 'Home',
+    component: () => import('../views/Home.vue')
+  }
 ];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes,
+  routes
 });
 
 export default router;

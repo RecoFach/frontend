@@ -6,7 +6,9 @@
         <h1>Welcome to RecoFach!</h1>
         <p>
           Don't have an account?
-          <el-link href="/register" type="primary" target="_self"> Create new one! </el-link>
+          <router-link to="/signup" class="el-link el-link--primary is-underline">
+            Create new one!
+          </router-link>
         </p>
         <login-form />
       </el-card>
@@ -21,8 +23,8 @@ import LoginForm from '@/components/forms/Login.vue';
 export default Vue.extend({
   name: 'Login',
   components: {
-    LoginForm,
-  },
+    LoginForm
+  }
 });
 </script>
 

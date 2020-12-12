@@ -46,24 +46,24 @@ export default Vue.extend({
             {
               type: 'email',
               message: 'Please input correct email address',
-              trigger: ['blur', 'change'],
-            },
+              trigger: ['blur', 'change']
+            }
           ],
-          password: { required: true, message: 'Please input your password', trigger: 'blur' },
-        },
-      },
+          password: { required: true, message: 'Please input your password', trigger: 'blur' }
+        }
+      }
     };
   },
   methods: {
     onSubmit(submitEvent: any) {
       const {
-        form: { email, password },
+        form: { email, password }
       } = this.$data;
 
       axios
         .post('http://localhost:8080/users', {
           email,
-          password,
+          password
         })
         .then((response) => {
           localStorage.setItem('user', JSON.stringify(response.data));
@@ -72,7 +72,7 @@ export default Vue.extend({
         .catch((error) => {
           alert(error.message);
         });
-    },
-  },
+    }
+  }
 });
 </script>

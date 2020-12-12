@@ -19,15 +19,15 @@ export default Vue.extend({
       axios
         .delete(`http://localhost:8080/users/`, {
           data: {
-            email: userEmail,
-          },
+            email: userEmail
+          }
         })
         .then(() => {
           alert('User deleted sucessfully!');
           window.location.href = '/login';
         });
-    },
-  },
+    }
+  }
 });
 </script>
 
