@@ -6,7 +6,7 @@
         <h1>Welcome to RecoFach!</h1>
         <p>
           Already have an account?
-          <el-link href="/login" type="primary" target="_blank"> Login here! </el-link>
+          <el-link href="/login" type="primary" target="_self"> Login here! </el-link>
         </p>
         <register-form />
       </el-card>

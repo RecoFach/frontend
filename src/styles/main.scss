@@ -3,3 +3,10 @@
 @import 'typography';
 
 @import 'components/forms';
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

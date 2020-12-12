@@ -89,7 +89,12 @@ export default Vue.extend({
           firstname,
           lastname,
         })
-        .then((response) => console.log(response.data));
+        .then((response) => {
+          window.location.href = '/login';
+        })
+        .catch((e) => {
+          alert(e.message);
+        });
     },
   },
 });
