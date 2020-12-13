@@ -37,7 +37,7 @@
         ref="password"
       ></el-input>
     </el-form-item>
-    <el-button type="primary" @click="onSubmit('form')">Sign Up</el-button>
+    <el-button type="primary" :loading="loading" @click="onSubmit('form')">Sign Up</el-button>
   </el-form>
 </template>
 
@@ -58,6 +58,7 @@ export default Vue.extend({
       }
     };
     return {
+      loading: false,
       showPassword: true,
       autoComplete: 'true',
       form: {
@@ -97,9 +98,9 @@ export default Vue.extend({
       } = this.$data;
 
       const BACKEND = `${process.env.VUE_APP_API_URL}:${process.env.VUE_APP_API_PORT}`;
-
+      this.$data.loading = true;
       axios
-        .put(`${BACKEND}/users/signup`, { username, password }, { headers: {} })
+        .put(`${BACKEND}/users/signup`, { username, password })
         .then((response) => {
           console.log(response);
           this.$message.success({
@@ -115,6 +116,9 @@ export default Vue.extend({
             showClose: true
           });
           console.log(e.message);
+        })
+        .finally(() => {
+          this.$data.loading = false;
         });
     }
   }
