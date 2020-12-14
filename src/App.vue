@@ -4,14 +4,28 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/Settings">Settings</router-link>
     </div> -->
-    <transition name="fade" mode="out-in">
+    <transition name="next" mode="out-in">
       <router-view />
     </transition>
   </div>
 </template>
 
+<script>
+import { USER_REQUEST } from '@/store/actions/user';
+
+export default {
+  name: 'app',
+  created() {
+    if (this.$store.getters.isAuthenticated) {
+      this.$store.dispatch(USER_REQUEST);
+    }
+  }
+};
+</script>
+
 <style lang="scss">
-#app {
+#app,
+body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

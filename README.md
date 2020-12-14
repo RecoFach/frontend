@@ -17,6 +17,9 @@ perform following steps:
     yarn install
     ```
 
+1. Create `.env` file and define following in it:
+    - `API_URL` - Url of your backend endpoint
+    - `API_PORT` - Port of your backend endpoint
 1. Done.
 
 ### Compiles and hot-reloads for development
