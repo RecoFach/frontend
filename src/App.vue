@@ -10,6 +10,19 @@
   </div>
 </template>
 
+<script>
+import { USER_REQUEST } from '@/store/actions/user';
+
+export default {
+  name: 'app',
+  created() {
+    if (this.$store.getters.isAuthenticated) {
+      this.$store.dispatch(USER_REQUEST);
+    }
+  }
+};
+</script>
+
 <style lang="scss">
 #app,
 body {

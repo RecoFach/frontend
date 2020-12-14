@@ -45,6 +45,8 @@
 import Vue from 'vue';
 import axios from 'axios';
 
+import { SIGNUP } from '@/store/routes';
+
 export default Vue.extend({
   name: 'RegisterCF',
   data() {
@@ -97,10 +99,9 @@ export default Vue.extend({
         form: { username, password }
       } = this.$data;
 
-      const BACKEND = `${process.env.VUE_APP_API_URL}:${process.env.VUE_APP_API_PORT}`;
       this.$data.loading = true;
       axios
-        .put(`${BACKEND}/users/signup`, { username, password })
+        .put(`${SIGNUP}`, { username, password })
         .then((response) => {
           console.log(response);
           this.$message.success({

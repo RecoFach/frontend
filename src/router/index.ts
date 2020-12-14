@@ -1,30 +1,54 @@
 import Vue from 'vue';
-import VueRouter, { RouteConfig } from 'vue-router';
+import VueRouter, { RouteConfig, Route } from 'vue-router';
+import Vuex from 'vuex';
 import Login from '../views/Login.vue';
 import SignUp from '../views/SignUp.vue';
 
+import store from '../store';
+
 Vue.use(VueRouter);
+Vue.use(Vuex);
+
+const ifNotAuthenticated = (to: Route, from: Route, next: Function) => {
+  if (!store.getters.isAuthenticated) {
+    next();
+    return;
+  }
+  next('/home');
+};
+
+const ifAuthenticated = (to: Route, from: Route, next: Function) => {
+  if (store.getters.isAuthenticated) {
+    next();
+    return;
+  }
+  next('/login');
+};
 
 const routes: Array<RouteConfig> = [
   {
     path: '/',
     name: 'Login',
-    component: Login
+    component: Login,
+    beforeEnter: ifNotAuthenticated
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    beforeEnter: ifNotAuthenticated
   },
   {
     path: '/signup',
     name: 'Sign Up',
-    component: SignUp
+    component: SignUp,
+    beforeEnter: ifNotAuthenticated
   },
   {
     path: '/home',
     name: 'Home',
-    component: () => import('../views/Home.vue')
+    component: () => import('../views/Home.vue'),
+    beforeEnter: ifAuthenticated
   }
 ];
 
