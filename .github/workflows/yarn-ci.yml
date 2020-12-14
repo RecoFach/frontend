@@ -19,5 +19,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Install yarn
       run: npm install -g yarn
+    - name: Install deps
+      run: yarn install
     - name: Build bundle
       run: yarn build
