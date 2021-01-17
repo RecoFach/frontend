@@ -22,6 +22,28 @@ perform following steps:
     - `API_PORT` - Port of your backend endpoint
 1. Done.
 
+## Production
+
+Follow these steps to create production-ready build. You will need [docker](https://docker.com) installed.
+
+1. Build the docker image. You need do pass *enviroment variables*
+   to specify location of backend service. Ensure to replace
+   `api_url` and `api_port` values with yours.
+
+    ```docker
+    docker build \
+    --build-arg api_url="http://localhost" \
+    --build-arg api_port="8080" \
+    -t recofach-frontend .
+    ```
+
+1. Run the docker image. Ensure map `3000` port to needed one.
+
+    ```docker
+    docker run -p 3000:3000 \
+    --name recofach-frontend recofach-frontend
+    ```
+
 ### Compiles and hot-reloads for development
 
 To run development server - use following command:

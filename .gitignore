@@ -6,6 +6,7 @@ node_modules
 .metals
 
 # local env files
+.env
 .env.local
 .env.*.local
 
