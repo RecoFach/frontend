@@ -24,7 +24,7 @@ perform following steps:
 
 ## Production
 
-Follow these steps to create production-ready build. You will need [docker](https://docker.com) installed.
+Follow these steps to create production-ready build. You will need [docker](https://docker.com) have installed.
 
 1. Build the docker image. You need do pass *enviroment variables*
    to specify location of backend service. Ensure to replace

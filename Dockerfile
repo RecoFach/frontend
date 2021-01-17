@@ -1,8 +1,8 @@
 # base image
 FROM node:lts-alpine
 
-# install simple http server for serving static content
-RUN npm install -g http-server
+# install smth for serving static content
+RUN npm install -g serve
 
 # make the 'app' folder the current working directory
 WORKDIR /app
@@ -29,4 +29,4 @@ RUN yarn bmodern
 
 # run app
 EXPOSE 3000
-CMD [ "http-server", "dist", "--port", "3000" ]
+CMD [ "serve", "-l", "3000", "-s", "dist" ]
