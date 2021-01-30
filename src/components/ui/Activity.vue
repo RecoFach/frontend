@@ -34,10 +34,9 @@ export default Vue.extend({
 <style lang="scss">
 .activity {
   display: block;
-  height: 25vh;
+  height: auto;
   position: relative;
   z-index: 0;
-  box-sizing: content-box;
   width: 450px;
   margin-right: 15px;
   margin-bottom: 15px;
