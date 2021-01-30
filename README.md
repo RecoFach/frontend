@@ -1,6 +1,6 @@
 # Frontend
 
-This is repository for frontend for RecoFach application.
+This is repository for the frontend for RecoFach application.
 
 ![Frontend poster](public/poster.png)
 
@@ -18,8 +18,8 @@ perform following steps:
     ```
 
 1. Create `.env` file and define following in it:
-    - `API_URL` - Url of your backend endpoint
-    - `API_PORT` - Port of your backend endpoint
+    - `VUE_APP_API_URL` - Url of your backend endpoint
+    - `VUE_APP_API_PORT` - Port of your backend endpoint
 1. Done.
 
 ## Production

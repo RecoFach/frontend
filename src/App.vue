@@ -1,15 +1,21 @@
 <template>
   <div id="app">
-    <transition name="next" mode="out-in">
+    <transition name="el-fade-in" mode="out-in">
       <el-container v-if="this.$store.getters.isAuthenticated">
         <header>
           <div class="flex-wrap">
             <div class="title">
               <h1 class="title">Hi, {{ user.profile.username }}</h1>
-              <p>here what can you do</p>
+              <p v-if="this.$route.path !== '/home'">Home / {{ this.$route.name }}</p>
+              <p v-else>here what can you do</p>
             </div>
             <div class="actions">
-              <el-button type="primary" @click="logout">Logout</el-button>
+              <el-button v-if="this.$route.path !== '/home'" @click="back" icon="el-icon-back">
+                Home
+              </el-button>
+              <el-button type="primary" @click="logout" icon="el-icon-switch-button">
+                Logout
+              </el-button>
             </div>
           </div>
         </header>
@@ -41,6 +47,9 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch(AUTH_LOGOUT).then(() => this.$router.push('/login'));
+    },
+    back() {
+      this.$router.back();
     }
   }
 };

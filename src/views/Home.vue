@@ -1,5 +1,5 @@
 <template>
-  <el-row justify="space-between" gutter="20" type="flex" class="activities">
+  <el-row justify="space-between" :gutter="20" type="flex" class="activities">
     <Activity
       title="Interests"
       image="box"
@@ -11,6 +11,7 @@
       image="safe"
       text="personalise and manage your account settings"
       button-text="Change my settings"
+      :action="settings"
     />
     <Activity
       title="Choose"
@@ -43,6 +44,9 @@ export default Vue.extend({
   methods: {
     logout() {
       this.$store.dispatch(AUTH_LOGOUT).then(() => this.$router.push('/login'));
+    },
+    settings() {
+      this.$router.push('/settings');
     }
   }
 });

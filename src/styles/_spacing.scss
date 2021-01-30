@@ -6,6 +6,10 @@
   flex-wrap: wrap;
 }
 
+.mb-60 {
+  margin-bottom: 60px;
+}
+
 .flex-wrap {
   display: flex;
   align-items: flex-end;
@@ -15,5 +19,17 @@
     margin-bottom: 20px;
     margin-right: 10px;
 
+    @media (max-width: 500px) {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 5px;
+      margin-right: 10px;
+
+      .el-button {
+        margin: 0;
+      }
+
+    }
   }
 }
