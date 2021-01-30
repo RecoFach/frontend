@@ -69,15 +69,15 @@ export default {
         .then((response) => {
           console.log(response);
           this.$message.success({
-            message: `Saved checkpoints for user!`,
+            message: `Saved fields of interest for `,
             duration: 5000,
             showClose: true
           });
         })
         .catch((e) => {
           this.$message.error({
-            message: 'Sorry, this username was already taken :(',
-            duration: 5000,
+            message: 'No fields of interest were specified, please provide some',
+            duration: 10000,
             showClose: true
           });
           console.log(e.message);
