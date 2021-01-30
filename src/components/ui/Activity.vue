@@ -4,7 +4,7 @@
     <p>
       {{ text }}
     </p>
-    <img :src="require('@/assets/' + image + '.png')" alt="image" />
+    <img :src="require('@/assets/' + image + '.jpg')" alt="image" />
     <el-button type="" @click="action" size="small">{{ buttonText }}</el-button>
   </el-card>
 </template>
