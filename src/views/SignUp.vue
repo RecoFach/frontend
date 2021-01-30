@@ -2,7 +2,7 @@
   <el-main class="login">
     <el-row type="flex" class="row-bg" justify="center" align="middle">
       <el-card shadow="always" align="left">
-        <img src="@/assets/logo.png" width="100" align="center" />
+        <img src="@/assets/logo.png" width="100" alt="RecoFach logo" />
         <h1>Welcome to RecoFach!</h1>
         <p>
           Already have an account?
@@ -30,8 +30,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .login {
-  background: url(https://source.unsplash.com/random?study);
-  background-position: center;
+  background: url(https://source.unsplash.com/random?study) center;
   background-size: cover;
   padding: 0;
 
@@ -44,6 +43,7 @@ export default Vue.extend({
 
     .el-card {
       padding: 10px 20px;
+
       .el-link,
       p {
         font-size: 14px;

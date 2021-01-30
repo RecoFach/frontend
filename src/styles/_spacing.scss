@@ -1,1 +1,13 @@
+.home {
+  margin: auto;
+}
 
+.flex-wrap {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  .actions {
+    margin-bottom: 40px;
+  }
+}

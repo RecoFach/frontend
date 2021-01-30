@@ -1,7 +1,9 @@
 @import 'global';
 @import 'animations';
+@import "spacing";
 @import 'typography';
 
+@import "components/header";
 @import 'components/forms';
 
 .button-container {

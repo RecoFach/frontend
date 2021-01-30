@@ -1,5 +1,17 @@
+body {
+  margin: 0;
+  .el-container {
+    margin: auto;
+    max-width: 960px;
+  }
+}
+
 a {
   &::after {
     content: '';
   }
+}
+
+.el-footer {
+  text-align: center;
 }
