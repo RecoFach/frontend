@@ -27,6 +27,8 @@
 
 <script>
 import { mapState } from 'vuex';
+import axios from 'axios';
+import { INTERESTS } from '@/store/routes';
 
 export default {
   name: 'Interests',
@@ -43,12 +45,46 @@ export default {
   computed: mapState(['user']),
   methods: {
     saveInterests() {
-      console.log(`saved interests ${this.softwareEngineering}`);
-      console.log(`saved interests ${this.aI}`);
-      console.log(`saved interests ${this.lowLevel}`);
-      console.log(`saved interests ${this.security}`);
-      console.log(`saved interests ${this.web}`);
-      console.log(`saved interests ${this.theoretical}`);
+      const interestsDict = {
+        softwareEngineering: this.softwareEngineering,
+        aI: this.aI,
+        lowLevel: this.lowLevel,
+        security: this.security,
+        web: this.web,
+        theoretical: this.theoretical
+      };
+      console.log(JSON.stringify(interestsDict));
+      const interestsDictStr = JSON.stringify(interestsDict);
+      // const {
+      // //   form: { softwareEngineering, aI, lowLevel, security, web, theoretical }
+      // // } = this.$data;
+      // console.log(`saved interests ${this.softwareEngineering}`);
+      // console.log(`saved interests ${this.aI}`);
+      // console.log(`saved interests ${this.lowLevel}`);
+      // console.log(`saved interests ${this.security}`);
+      // console.log(`saved interests ${this.web}`);
+      // console.log(`saved interests ${this.theoretical}`);
+      axios
+        .post(`${INTERESTS}`, { interestsDictStr })
+        .then((response) => {
+          console.log(response);
+          this.$message.success({
+            message: `Saved checkpoints for user!`,
+            duration: 5000,
+            showClose: true
+          });
+        })
+        .catch((e) => {
+          this.$message.error({
+            message: 'Sorry, this username was already taken :(',
+            duration: 5000,
+            showClose: true
+          });
+          console.log(e.message);
+        })
+        .finally(() => {
+          // this.$data.loading = false;
+        });
     }
   }
 };
