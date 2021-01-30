@@ -49,6 +49,12 @@ const routes: Array<RouteConfig> = [
     name: 'Home',
     component: () => import('../views/Home.vue'),
     beforeEnter: ifAuthenticated
+  },
+  {
+    path: '/interests',
+    name: 'Interests',
+    component: () => import('../views/Interests.vue'),
+    beforeEnter: ifAuthenticated
   }
 ];
 
