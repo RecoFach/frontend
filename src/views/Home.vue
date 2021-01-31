@@ -5,6 +5,7 @@
       image="box"
       text="select computer science fields you interested in"
       button-text="Select my interests"
+      :action="interests"
     />
     <Activity
       title="Settings"
@@ -47,6 +48,9 @@ export default Vue.extend({
     },
     settings() {
       this.$router.push('/settings');
+    },
+    interests() {
+      this.$router.push('/interests');
     }
   }
 });

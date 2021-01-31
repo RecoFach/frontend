@@ -64,7 +64,7 @@ export default Vue.extend({
       console.log(typeof elform);
       elform.validate((valid: boolean) => {
         if (valid) {
-          console.log('Submiting valid form..');
+          console.log('Submitting valid form..');
           this.sendForm();
         } else {
           console.log('Form is not valid');
