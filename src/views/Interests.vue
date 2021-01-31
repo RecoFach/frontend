@@ -122,9 +122,27 @@ export default {
           }
         }
       }
-      this.$store.dispatch(USER_UPDATE_INTEREST, { interests }).finally(() => {
-        this.$data.loading = false;
-      });
+      this.$store
+        .dispatch(USER_UPDATE_INTEREST, { interests })
+        .then((response) => {
+          console.log(response);
+          this.$message.success({
+            message: `Hey, ${response.data.username}, your interests are updated`,
+            duration: 5000,
+            showClose: true
+          });
+        })
+        .catch((e) => {
+          this.$message.error({
+            message: 'Sorry, something went wrong :(',
+            duration: 5000,
+            showClose: true
+          });
+          console.log(e.message);
+        })
+        .finally(() => {
+          this.$data.loading = false;
+        });
     }
   }
 };

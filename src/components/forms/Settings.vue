@@ -9,7 +9,12 @@
           :rules="form.rules.name"
           class="is-no-asterisk"
         >
-          <el-input v-model="form.name" type="text" ref="text" placeholder="Your name"></el-input>
+          <el-input
+            v-model="form.name"
+            type="text"
+            ref="text"
+            :placeholder="this.user.profile.name || 'Your name'"
+          ></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="12">
@@ -24,7 +29,7 @@
             v-model="form.surname"
             type="text"
             ref="text"
-            placeholder="Your surname"
+            :placeholder="this.user.profile.surname || 'Your surname'"
           ></el-input>
         </el-form-item>
       </el-col>
@@ -79,10 +84,9 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import axios from 'axios';
 
-import { SIGNUP } from '@/store/routes';
 import { mapState } from 'vuex';
+import { USER_UPDATE_DETAILS } from '@/store/actions/user';
 
 export default Vue.extend({
   name: 'SettingsCF',
@@ -134,7 +138,6 @@ export default Vue.extend({
     onSubmit() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const elform: any = this.$refs.form;
-      console.log(typeof elform);
       elform.validate((valid: boolean) => {
         if (valid) {
           console.log('Submiting valid form..');
@@ -147,23 +150,23 @@ export default Vue.extend({
 
     sendForm() {
       const {
-        form: { username, password }
+        form: { name, surname, email }
       } = this.$data;
 
       this.$data.loading = true;
-      axios
-        .put(`${SIGNUP}`, { username, password })
+      this.$store
+        .dispatch(USER_UPDATE_DETAILS, { name, surname, email })
         .then((response) => {
           console.log(response);
           this.$message.success({
-            message: `Congrats, ${response.data.username}, your account was created!`,
+            message: `Hey, ${response.data.username}, your interests are updated`,
             duration: 5000,
             showClose: true
           });
         })
         .catch((e) => {
           this.$message.error({
-            message: 'Sorry, this username was already taken :(',
+            message: 'Sorry, something went wrong :(',
             duration: 5000,
             showClose: true
           });

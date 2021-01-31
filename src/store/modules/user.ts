@@ -1,12 +1,17 @@
 /* eslint-disable no-shadow */
 import { AUTH_LOGOUT, AUTH_SUCCESS } from '@/store/actions/auth';
-import { USER_ERROR, USER_REQUEST, USER_SUCCESS, USER_UPDATE_INTEREST } from '@/store/actions/user';
-import { User, UserState } from '@/types/model';
+import {
+  USER_ERROR,
+  USER_REQUEST,
+  USER_SUCCESS,
+  USER_UPDATE_INTEREST,
+  USER_UPDATE_DETAILS
+} from '@/store/actions/user';
+import { User, UserState, Interests, Details } from '@/types/model';
 import { UserStatus } from '@/types/enum';
 import { USERS } from '@/store/routes';
 import { Commit } from 'vuex';
 import axios from 'axios';
-import { Interests } from '@/types/model/Interests';
 
 const getToken = () => localStorage.getItem('user-token') || '';
 
@@ -19,7 +24,8 @@ const state: UserState = {
 const getters = {
   getProfile: (s: UserState) => s.profile,
   getInterests: (s: UserState) => s.profile?.interests,
-  isProfileLoaded: (s: UserState) => !!s.profile?.username
+  isProfileLoaded: (s: UserState) => !!s.profile?.username,
+  isDetailsFull: (s: UserState) => !!s.profile?.name
 };
 
 const actions = {
@@ -65,6 +71,30 @@ const actions = {
           reject(err);
         });
     });
+  },
+  [USER_UPDATE_DETAILS]: ({ commit }: { commit: Commit }, details: Details) => {
+    return new Promise((resolve, reject) => {
+      commit(USER_UPDATE_INTEREST);
+      console.log(`[Mutation User]: updating interests for: ${state.profile?.id} with ${details}`);
+      axios({
+        url: `${USERS}${state.profile?.id}/details`,
+        method: 'post',
+        headers: { Authorization: getToken() },
+        data: details
+      })
+        .then((resp) => {
+          commit(USER_SUCCESS, resp.data);
+          console.log('resp', resp);
+          console.log('user', state.profile);
+          console.log('[Mutation User]: 200: User info was updated');
+          resolve(resp);
+        })
+        .catch((err) => {
+          commit(USER_ERROR);
+          console.log('[Mutation User]: 500: Something went wrong');
+          reject(err);
+        });
+    });
   }
 };
 
@@ -77,6 +107,9 @@ const mutations = {
     state.profile = resp;
   },
   [USER_UPDATE_INTEREST]: (state: UserState) => {
+    state.status = UserStatus.LOADING;
+  },
+  [USER_UPDATE_DETAILS]: (state: UserState) => {
     state.status = UserStatus.LOADING;
   },
   [USER_ERROR]: (state: UserState) => {
