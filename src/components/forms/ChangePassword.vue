@@ -14,6 +14,7 @@
         ref="password"
       ></el-input>
     </el-form-item>
+
     <el-form-item
       prop="passwordConfirm"
       label="Confirm new password"
@@ -44,13 +45,16 @@ import { SIGNUP } from '@/store/routes';
 import { mapState } from 'vuex';
 
 export default Vue.extend({
-  name: 'SettingsCF',
+  name: 'ChangePasswordCF',
   computed: mapState(['user']),
+  created() {
+    this.$data.currentUsername = this.user.profile.username;
+  },
   data() {
     const validatePass = (rule: Record<string, unknown>, value: string, callback: Function) => {
       if (value === '') {
         callback(new Error('Please input your password again'));
-      } else if (value === this.user.profile.username) {
+      } else if (value === this.$data.currentUsername) {
         callback(new Error('Password cannot be your username.'));
       } else if (value !== this.$data.form.password) {
         callback(new Error("Passwords doesn't match!"));
@@ -62,12 +66,11 @@ export default Vue.extend({
       loading: false,
       showPassword: true,
       autoComplete: 'true',
+      currentUsername: '',
       form: {
-        username: '',
         password: '',
         passwordConfirm: '',
         rules: {
-          username: { required: true, message: 'Please input a username', trigger: 'blur' },
           password: { required: true, message: 'Please input your password', trigger: 'blur' },
           passwordConfirm: {
             required: true,
@@ -129,6 +132,7 @@ export default Vue.extend({
 .p-0 {
   padding: 0;
 }
+
 .el-input--suffix .el-input__inner {
   padding-right: 10px;
 }

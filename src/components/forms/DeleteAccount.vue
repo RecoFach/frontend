@@ -8,10 +8,9 @@
     >
       <el-input
         v-model="form.password"
-        :showPassword="showPassword"
         placeholder="Username goes here"
-        type="password"
-        ref="password"
+        type="text"
+        ref="text"
       ></el-input>
     </el-form-item>
     <el-button type="danger" :loading="loading" @click="onSubmit('form')">
@@ -28,28 +27,29 @@ import { SIGNUP } from '@/store/routes';
 import { mapState } from 'vuex';
 
 export default Vue.extend({
-  name: 'SettingsCF',
+  name: 'DeleteAccountCF',
   computed: mapState(['user']),
+  created() {
+    this.$data.currentUsername = this.user.profile.username;
+  },
   data() {
     const validateUsername = (rule: Record<string, unknown>, value: string, callback: Function) => {
-      if (value === '') {
-        callback(new Error('Please input your username'));
-      } else if (value !== this.user.profile.username) {
-        callback(new Error('Password cannot be your username.'));
+      if (value.length > 0 && value !== this.$data.currentUsername) {
+        callback(new Error('Confirm delete request with your username.'));
+      } else if (value.length === 0) {
+        callback(new Error('Cannot be empty.'));
       } else {
         callback();
       }
     };
     return {
       loading: false,
-      showPassword: true,
-      autoComplete: 'true',
+      currentUsername: '',
       form: {
         username: '',
         rules: {
           username: {
             required: true,
-            message: 'Please input a username',
             validator: validateUsername,
             trigger: 'blur'
           }
@@ -103,12 +103,3 @@ export default Vue.extend({
   }
 });
 </script>
-
-<style lang="scss">
-.p-0 {
-  padding: 0;
-}
-.el-input--suffix .el-input__inner {
-  padding-right: 10px;
-}
-</style>
