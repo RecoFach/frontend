@@ -19,6 +19,7 @@
       image="bulb"
       text="find out what courses you may like to study"
       button-text="Recommend a course"
+      :action="recommendation"
     />
     <Activity
       title="Log out"
@@ -51,6 +52,9 @@ export default Vue.extend({
     },
     interests() {
       this.$router.push('/interests');
+    },
+    recommendation() {
+      this.$router.push('/recommendation');
     }
   }
 });

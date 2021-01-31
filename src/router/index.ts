@@ -44,6 +44,7 @@ const routes: Array<RouteConfig> = [
     component: SignUp,
     beforeEnter: ifNotAuthenticated
   },
+
   {
     path: '/home',
     name: 'Home',
@@ -60,6 +61,12 @@ const routes: Array<RouteConfig> = [
     path: '/interests',
     name: 'Interests',
     component: () => import('../views/Interests.vue'),
+    beforeEnter: ifAuthenticated
+  },
+  {
+    path: '/recommendation',
+    name: 'Recommendation',
+    component: () => import('../views/Recommendation.vue'),
     beforeEnter: ifAuthenticated
   }
 ];
