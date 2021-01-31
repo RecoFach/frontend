@@ -1,20 +1,20 @@
 <template>
-  <el-row justify="space-between" :gutter="20" type="flex" class="activities">
-    <RecommendedSubject
-      :subjectName="this.subjectName"
-      :url="this.url"
-      :sws="this.sws"
-      :subjectType="this.subjectType"
-      :area="this.area"
-    />
-    <RecommendedSubject
-      subjectName="Subject2 "
-      url="http://2323.com"
-      :sws="this.sws"
-      subjectType="2"
-      area="Array"
-    />
-  </el-row>
+  <div class="recommendations">
+    <h2>Recommendations</h2>
+    <p>Here you can select your <b>favorite topics</b> to study</p>
+    <el-row :gutter="20" type="flex">
+      <RecommendedSubject
+        v-for="(subject, index) in subjects"
+        :index="index"
+        :key="subject.name"
+        :subjectName="subject.name"
+        :url="subject.url"
+        :sws="subject.sws"
+        :subjectType="subject.type"
+        :tags="subject.tags"
+      />
+    </el-row>
+  </div>
 </template>
 
 <script>
@@ -32,20 +32,46 @@ export default {
   },
   data() {
     return {
-      subjectName: '',
-      url: '',
-      sws: '',
-      subjectType: '',
-      area: ''
+      subjects: [
+        {
+          name: 'Komplexpraktikum Computer- und robotergestÔøΩtzte Chirurgie',
+          url: 'http://google.com/',
+          sws: '2',
+          type: 'sem',
+          tags: ['AI', 'low']
+        },
+        { name: 'Test', url: 'http://google.com/', sws: '3', type: 'lec', tags: ['swt', 'cyber'] },
+        { name: 'Test', url: 'http://google.com/', sws: '3', type: 'lec', tags: ['swt', 'cyber'] },
+        { name: 'Test', url: 'http://google.com/', sws: '3', type: 'lec', tags: ['swt', 'cyber'] }
+      ]
     };
   },
   mounted() {
-    const listOfRecommendations = Array;
-    axios.get(`${RECOMMENDATION}`);
+    // const listOfRecommendations = Array;
+    // axios.get(`${RECOMMENDATION}`);
   }
 };
 </script>
 
-<!--<style scoped>-->
+<style lang="scss">
+.recommendations {
+  .actions {
+    text-align: center;
+  }
 
-<!--</style>-->
+  & > h2 {
+    font-size: 50px;
+    margin-bottom: 0;
+  }
+
+  & > p {
+    margin-bottom: 40px;
+  }
+
+  .el-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+}
+</style>
