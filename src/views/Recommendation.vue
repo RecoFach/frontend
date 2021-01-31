@@ -36,13 +36,13 @@ export default {
         {
           name: 'Komplexpraktikum Computer- und robotergestÔøΩtzte Chirurgie',
           url: 'http://google.com/',
-          sws: '2',
+          sws: 2,
           type: 'sem',
           tags: ['AI', 'low']
         },
-        { name: 'Test', url: 'http://google.com/', sws: '3', type: 'lec', tags: ['swt', 'cyber'] },
-        { name: 'Test', url: 'http://google.com/', sws: '3', type: 'lec', tags: ['swt', 'cyber'] },
-        { name: 'Test', url: 'http://google.com/', sws: '3', type: 'lec', tags: ['swt', 'cyber'] }
+        { name: 'Test 1', url: 'http://google.com/', sws: 3, type: 'lec', tags: ['swt', 'cyber'] },
+        { name: 'Test 2', url: 'http://google.com/', sws: 3, type: 'lec', tags: ['swt', 'cyber'] },
+        { name: 'Test 3', url: 'http://google.com/', sws: 3, type: 'lec', tags: ['swt', 'cyber'] }
       ]
     };
   },
