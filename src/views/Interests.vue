@@ -112,18 +112,16 @@ export default {
   computed: mapState(['user']),
   methods: {
     saveInterests() {
+      this.$data.loading = true;
       const interests = [];
       // eslint-disable-next-line no-restricted-syntax,guard-for-in
       for (const ref in this.$refs) {
         if (this.$refs[ref]) {
-          console.log(ref.toString(), this.$refs[ref][0].$data.isActive);
           if (this.$refs[ref][0].$data.isActive) {
             interests.push(ref.toString().toUpperCase());
           }
         }
       }
-      console.log(interests, '- json');
-      this.$data.loading = true;
       this.$store.dispatch(USER_UPDATE_INTEREST, { interests }).finally(() => {
         this.$data.loading = false;
       });

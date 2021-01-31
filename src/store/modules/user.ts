@@ -12,7 +12,8 @@ const getToken = () => localStorage.getItem('user-token') || '';
 
 const state: UserState = {
   status: UserStatus.UNKNOWN,
-  profile: null
+  profile: null,
+  id: localStorage.getItem('user-id') || ''
 };
 
 const getters = {
@@ -24,9 +25,9 @@ const getters = {
 const actions = {
   [USER_REQUEST]: ({ commit }: { commit: Commit }) => {
     commit(USER_REQUEST);
-    console.log(`[Mutation User]: found user with id: ${state.profile?.id}`);
+    console.log(`[Mutation User]: found user with id: ${state.id}`);
     axios({
-      url: `${USERS}${state.profile?.id}`,
+      url: `${USERS}${state.id}`,
       method: 'get',
       headers: { Authorization: getToken() }
     })
@@ -40,24 +41,30 @@ const actions = {
       });
   },
   [USER_UPDATE_INTEREST]: ({ commit }: { commit: Commit }, interests: Interests) => {
-    commit(USER_UPDATE_INTEREST);
-    console.log(`[Mutation User]: updating interests for: ${state.profile?.id} with ${interests}`);
-    axios({
-      url: `${USERS}${state.profile?.id}/interests`,
-      method: 'post',
-      headers: { Authorization: getToken() },
-      data: interests
-    })
-      .then((resp) => {
-        commit(USER_SUCCESS, resp.data);
-        console.log('resp', resp);
-        console.log('user', state.profile);
-        console.log('[Mutation User]: 200: User info was updated');
+    return new Promise((resolve, reject) => {
+      commit(USER_UPDATE_INTEREST);
+      console.log(
+        `[Mutation User]: updating interests for: ${state.profile?.id} with ${interests}`
+      );
+      axios({
+        url: `${USERS}${state.profile?.id}/interests`,
+        method: 'post',
+        headers: { Authorization: getToken() },
+        data: interests
       })
-      .catch(() => {
-        commit(USER_ERROR);
-        console.log('[Mutation User]: 500: Something went wrong');
-      });
+        .then((resp) => {
+          commit(USER_SUCCESS, resp.data);
+          console.log('resp', resp);
+          console.log('user', state.profile);
+          console.log('[Mutation User]: 200: User info was updated');
+          resolve(resp);
+        })
+        .catch((err) => {
+          commit(USER_ERROR);
+          console.log('[Mutation User]: 500: Something went wrong');
+          reject(err);
+        });
+    });
   }
 };
 
