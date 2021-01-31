@@ -49,16 +49,22 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { mapState } from 'vuex';
 
 export default Vue.extend({
   name: 'InterestC',
   props: {
+    name: String,
     title: String,
     desc: String,
     image: {
       type: String,
       default: 'bomb'
     }
+  },
+  computed: mapState(['user']),
+  created() {
+    this.isActive = this.user.profile.interests.includes(this.name);
   },
   data() {
     return {

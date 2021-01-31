@@ -4,4 +4,5 @@ export interface User {
   username: string;
   email: string;
   id: string;
+  interests: Array<string>;
 }

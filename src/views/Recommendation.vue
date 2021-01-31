@@ -18,11 +18,8 @@
 </template>
 
 <script>
-import Vue from 'vue';
 import { mapState } from 'vuex';
 import RecommendedSubject from '@/components/ui/RecommendedSubject.vue';
-import axios from 'axios';
-import { RECOMMENDATION } from '@/store/routes';
 
 export default {
   name: 'Recommendation',

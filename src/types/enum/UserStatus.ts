@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export const enum UserStatus {
   UNKNOWN,
   LOADING,
@@ -5,5 +6,3 @@ export const enum UserStatus {
   LOADED,
   ERROR
 }
-
-export default UserStatus;

@@ -1,8 +1,8 @@
 import { AuthStatus } from '../enum/AuthStatus';
 
 export interface AuthState {
-  token: string;
-  id: string;
+  token: string | null;
+  id: string | null;
   status: AuthStatus;
   hasLoadedOnce: boolean;
 }

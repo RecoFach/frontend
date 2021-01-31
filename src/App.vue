@@ -1,11 +1,13 @@
 <template>
   <div id="app">
     <transition name="el-fade-in" mode="out-in">
-      <el-container v-if="this.$store.getters.isAuthenticated">
+      <el-container v-if="this.$store.getters.isProfileLoaded">
         <header>
           <div class="flex-wrap">
             <div class="title">
-              <h1 class="title" v-if="user.profile != null">Hi, {{ user.profile.username }}</h1>
+              <h1 class="title" v-if="this.$store.getters.isProfileLoaded">
+                Hi, {{ user.profile.username }}
+              </h1>
               <p v-if="this.$route.path !== '/home'">Home / {{ this.$route.name }}</p>
               <p v-else>here what can you do</p>
             </div>

@@ -69,8 +69,12 @@ const mutations = {
   [AUTH_REQUEST]: (state: AuthState) => {
     state.status = AuthStatus.LOADING;
   },
-  [AUTH_SUCCESS]: (state: AuthState, resp: { headers: { authorization: string } }) => {
+  [AUTH_SUCCESS]: (
+    state: AuthState,
+    resp: { headers: { authorization: string }; data: { id: string } }
+  ) => {
     state.status = AuthStatus.SUCCESS;
+    state.id = resp.data.id;
     state.token = resp.headers.authorization;
     state.hasLoadedOnce = true;
   },
@@ -79,8 +83,8 @@ const mutations = {
     state.hasLoadedOnce = true;
   },
   [AUTH_LOGOUT]: (state: AuthState) => {
-    state.token = '';
-    state.id = '';
+    state.token = null;
+    state.id = null;
   }
 };
 
