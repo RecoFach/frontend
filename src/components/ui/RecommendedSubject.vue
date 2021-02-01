@@ -123,7 +123,7 @@ export default Vue.extend({
 
     h2 {
       color: #eac374;
-      width: 89%;
+      width: 97%;
     }
 
     .big-number {
