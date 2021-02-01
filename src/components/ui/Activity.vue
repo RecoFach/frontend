@@ -80,7 +80,7 @@ export default Vue.extend({
 
     & > .el-card__body > img {
       right: -50px;
-      bottom: 0px;
+      bottom: -10px;
       width: 180px;
     }
   }

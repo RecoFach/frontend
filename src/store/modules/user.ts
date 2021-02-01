@@ -6,7 +6,8 @@ import {
   USER_SUCCESS,
   USER_UPDATE_INTEREST,
   USER_UPDATE_DETAILS,
-  USER_UPDATE_PASSWORD
+  USER_UPDATE_PASSWORD,
+  USER_DELETE
 } from '@/store/actions/user';
 import { User, UserState, Interests, Details } from '@/types/model';
 import { UserStatus } from '@/types/enum';
@@ -89,6 +90,15 @@ const actions = {
       'post',
       user,
       'password details'
+    );
+  },
+  [USER_DELETE]: ({ commit }: { commit: Commit }) => {
+    return action(
+      { commit },
+      `${USERS}${state.profile?.id}`,
+      'delete',
+      undefined,
+      'delete user account'
     );
   }
 };

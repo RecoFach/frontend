@@ -79,8 +79,11 @@ export default Vue.extend({
   }
 
   .tags {
-    padding-top: 10px;
+    padding-top: 5px;
     padding-bottom: 20px;
+    .el-tag {
+      margin-top: 5px;
+    }
   }
 
   .details {
@@ -138,10 +141,24 @@ export default Vue.extend({
     }
   }
   @media (max-width: 500px) {
+    .el-tag {
+    }
+
     img {
-      width: 120px;
-      bottom: -22px;
-      right: -50px;
+      width: 180px;
+      bottom: -25px;
+      right: -20px;
+    }
+
+    &.recommended {
+      img {
+        bottom: -30px;
+        right: -30px;
+      }
+    }
+
+    .details {
+      width: 64%;
     }
   }
 

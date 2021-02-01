@@ -21,10 +21,10 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import axios from 'axios';
 
-import { SIGNUP } from '@/store/routes';
 import { mapState } from 'vuex';
+import { AUTH_LOGOUT } from '@/store/actions/auth';
+import { USER_DELETE } from '@/store/actions/user';
 
 export default Vue.extend({
   name: 'DeleteAccountCF',
@@ -60,9 +60,8 @@ export default Vue.extend({
   methods: {
     onSubmit() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const elform: any = this.$refs.form;
-      console.log(typeof elform);
-      elform.validate((valid: boolean) => {
+      const { form }: any = this.$refs;
+      form.validate((valid: boolean) => {
         if (valid) {
           console.log('Submitting valid form..');
           this.sendForm();
@@ -73,28 +72,23 @@ export default Vue.extend({
     },
 
     sendForm() {
-      const {
-        form: { username, password }
-      } = this.$data;
-
       this.$data.loading = true;
-      axios
-        .put(`${SIGNUP}`, { username, password })
-        .then((response) => {
-          console.log(response);
+      this.$store
+        .dispatch(USER_DELETE)
+        .then(() => {
+          this.$store.dispatch(AUTH_LOGOUT).then(() => this.$router.push('/login'));
           this.$message.success({
-            message: `Congrats, ${response.data.username}, your account was created!`,
-            duration: 5000,
+            message: `Account of ${this.user.username} was successfully deleted`,
+            duration: 7000,
             showClose: true
           });
         })
-        .catch((e) => {
+        .catch(() => {
           this.$message.error({
-            message: 'Sorry, this username was already taken :(',
+            message: `Something went wrong. Try again later.`,
             duration: 5000,
             showClose: true
           });
-          console.log(e.message);
         })
         .finally(() => {
           this.$data.loading = false;
