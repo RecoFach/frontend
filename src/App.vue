@@ -6,7 +6,7 @@
           <div class="flex-wrap">
             <div class="title">
               <h1 class="title" v-if="this.$store.getters.isDetailsFull">
-                Hi, {{ user.profile.name }}
+                Hi, {{ user.profile.name }} {{ user.profile.surname }}
               </h1>
               <h1 class="title" v-else-if="this.$store.getters.isProfileLoaded">
                 Hi, {{ user.profile.username }}

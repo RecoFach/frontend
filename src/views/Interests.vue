@@ -48,63 +48,55 @@ export default {
           title: 'Artificial Intelligence',
           image: 'duck',
           desc:
-            'Artificial Intelligence is a field where smth is being researched.' +
-            ' As an example can be considered Lecture "Machine Learning"'
+            'Artificial Intelligence - is a field where practical and ' +
+            'theoretical concepts of artificial intelligence will be ' +
+            'explained. As an example can be considered Lecture ' +
+            '"Machine Learning"'
         },
         {
           ref: 'LOWLEVEL',
           title: 'Assembler Level',
           image: 'battery',
           desc:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam' +
-            ' varius diam molestie mauris facilisis ultrices. Proin quis ' +
-            ' gravida neque. Donec in tristique nibh. Etiam fringilla gravida ' +
-            ' mauris sed pretium. Aliquam erat volutpat. Vivamus et nisl eu' +
-            ' arcu tincidunt vestibulum. Nulla imperdiet condimentum convallis.'
+            'Assembler-Level - is a field where low lewel concepts of ' +
+            'computer science will be taught.  As an example can be' +
+            'considered Lecture Scheduling theory'
         },
         {
           ref: 'SECURITY',
           title: 'Cyber Security',
           image: 'lock',
           desc:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam' +
-            ' varius diam molestie mauris facilisis ultrices. Proin quis ' +
-            ' gravida neque. Donec in tristique nibh. Etiam fringilla gravida ' +
-            ' mauris sed pretium. Aliquam erat volutpat. Vivamus et nisl eu' +
-            ' arcu tincidunt vestibulum. Nulla imperdiet condimentum convallis.'
+            'Cyber Security - is a field where will be presented ' +
+            'privacy concepts and cryptography. As an example can ' +
+            'be considered Lecture "Cryptography and Cryptanalysis"'
         },
         {
           ref: 'SOFTWARE',
           title: 'Software Development',
           image: 'computer',
           desc:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam' +
-            ' varius diam molestie mauris facilisis ultrices. Proin quis ' +
-            ' gravida neque. Donec in tristique nibh. Etiam fringilla gravida ' +
-            ' mauris sed pretium. Aliquam erat volutpat. Vivamus et nisl eu' +
-            ' arcu tincidunt vestibulum. Nulla imperdiet condimentum convallis.'
+            'Software engineering is a field where you will learn ' +
+            'software development and proper architecture. As an ' +
+            'example can be considered Lecture “Systems engineering 1”'
         },
         {
           ref: 'THEORETICAL',
           title: 'Theoretical Informatics',
           image: 'shape',
           desc:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam' +
-            ' varius diam molestie mauris facilisis ultrices. Proin quis ' +
-            ' gravida neque. Donec in tristique nibh. Etiam fringilla gravida ' +
-            ' mauris sed pretium. Aliquam erat volutpat. Vivamus et nisl eu' +
-            ' arcu tincidunt vestibulum. Nulla imperdiet condimentum convallis.'
+            'Theoretical Informatics - is a field where theorem proofs ' +
+            'will be shown. As an example can be considered Lecture ' +
+            '"Theory of Weighted Tree Automata"'
         },
         {
           ref: 'WEB',
           title: 'Web Development',
           image: 'sphere',
           desc:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam' +
-            ' varius diam molestie mauris facilisis ultrices. Proin quis ' +
-            ' gravida neque. Donec in tristique nibh. Etiam fringilla gravida ' +
-            ' mauris sed pretium. Aliquam erat volutpat. Vivamus et nisl eu' +
-            ' arcu tincidunt vestibulum. Nulla imperdiet condimentum convallis.'
+            'Web Dev - is a field where will be taught concepts of web ' +
+            'development and frontend. As an example can be considered ' +
+            'Lecture "Data Visualization"'
         }
       ]
     };

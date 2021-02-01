@@ -1,5 +1,5 @@
 <template>
-  <div class="settings">
+  <div class="settings" v-if="this.$store.getters.isProfileLoaded">
     <el-row :gutter="20" class="mb-60">
       <el-col :span="8" :xs="24">
         <img src="../assets/safe.jpg" width="200" alt="User Settings" />
@@ -61,8 +61,8 @@ export default Vue.extend({
   },
   methods: {
     onSubmit() {
-      const user: any = localStorage.getItem('user');
-      const userEmail: string = JSON.parse(user).email;
+      const user = '';
+      const userEmail = `${user}`;
 
       axios
         .delete(`http://localhost:8080/users/`, {

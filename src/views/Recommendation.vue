@@ -8,11 +8,13 @@
         v-for="(subject, index) in subjects"
         :index="index"
         :key="subject.name"
-        :subjectName="subject.name"
+        :name="subject.name"
         :url="subject.url"
         :sws="subject.sws"
-        :subjectType="subject.type"
+        :type="subject.type"
         :tags="subject.tags"
+        :semester="subject.semester"
+        :lang="subject.lang"
       />
     </el-row>
   </div>
@@ -38,29 +40,37 @@ export default {
           name: 'Some subject 1',
           url: 'http://google.com/',
           sws: 2,
-          type: 'sem',
-          tags: ['AI', 'low']
+          type: 'Lecture',
+          tags: ['ai', 'low'],
+          lang: 'DE',
+          semester: 'SS 21'
         },
         {
           name: 'Some subject 2',
           url: 'http://google.com/',
           sws: 3,
-          type: 'lec',
-          tags: ['swt', 'cyber']
+          type: 'Lecture',
+          lang: 'EN',
+          tags: ['swt', 'cyber'],
+          semester: 'SS 21'
         },
         {
           name: 'Some subject 3',
           url: 'http://google.com/',
           sws: 3,
-          type: 'lec',
-          tags: ['swt', 'cyber']
+          type: 'Seminar',
+          lang: 'DE',
+          tags: ['swt', 'cyber'],
+          semester: 'SS 21'
         },
         {
           name: 'Some subject 4',
           url: 'http://google.com/',
           sws: 3,
-          type: 'lec',
-          tags: ['swt', 'cyber']
+          type: 'Lecture',
+          lang: 'DE',
+          tags: ['swt', 'cyber'],
+          semester: 'SS 21'
         }
       ]
     };
@@ -90,11 +100,13 @@ export default {
       Object.entries(d).forEach((c) => {
         const course = c[1];
         data.push({
-          name: course['Course name'].replace(/[\u{0080}-\u{FFFF}]/gu, ''),
+          name: course['Course name'].normalize(),
           url: course.Link,
           sws: course.sws,
           type: this.detectType(course),
-          tags: this.detectTags(course)
+          tags: this.detectTags(course),
+          semester: this.detectSemester(course),
+          lang: this.detectLang(course)
         });
       });
       return data;
@@ -106,13 +118,19 @@ export default {
     },
     detectTags(course) {
       const tags = [];
-      if (course.AI === 1) tags.push('AI');
-      if (course['Low-level'] === 1) tags.push('LOWLEVEL');
-      if (course['Software engineering'] === 1) tags.push('SOFTWARE');
-      if (course.Security === 1) tags.push('SECURITY');
-      if (course.Web === 1) tags.push('WEB');
-      if (course.Theoretical === 1) tags.push('THEORETICAL');
+      if (course.AI === 1) tags.push('Artificial Intelligence');
+      if (course['Low-level'] === 1) tags.push('Assembler Level');
+      if (course['Software engineering'] === 1) tags.push('Software');
+      if (course.Security === 1) tags.push('Cyber Security');
+      if (course.Web === 1) tags.push('Web Dev');
+      if (course.Theoretical === 1) tags.push('Web Dev');
       return tags;
+    },
+    detectSemester(course) {
+      return course.Sommersemester === 1 ? 'SoSe' : 'WiSe';
+    },
+    detectLang(course) {
+      return course.english === 1 ? 'EN' : 'DE';
     }
   }
 };

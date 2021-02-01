@@ -73,7 +73,7 @@
         auto-complete="off"
         type="email"
         ref="email"
-        placeholder="Your E-Mail address here"
+        :placeholder="this.user.profile.email || 'Your E-Mail address here'"
       ></el-input>
     </el-form-item>
     <el-button type="primary" :loading="loading" @click="onSubmit('form')">

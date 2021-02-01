@@ -1,12 +1,30 @@
 <template>
   <el-card shadow="hover" class="subject" :class="{ recommended: index === 0 }">
-    <h2>{{ subjectName }}</h2>
+    <h2>{{ name }}</h2>
     <div class="stick-bottom">
-      <el-tag v-if="index === 0">Recommended</el-tag>
-      <el-tag v-for="tag in tags" :type="tag" :key="tag.text">{{ tag }}</el-tag>
+      <div class="tags">
+        <el-tag v-if="index === 0">Recommended</el-tag>
+        <el-tag v-for="tag in tags" :type="tag" :key="tag.text">{{ tag }}</el-tag>
+      </div>
       <img :src="require('@/assets/' + image + '.jpg')" width="245" alt="image" />
-      <p>Number of SWS: {{ sws }}</p>
-      <p>Type: {{ subjectType }}</p>
+      <div class="details">
+        <div class="big-number">
+          <div class="desc">Type:</div>
+          {{ type }}
+        </div>
+        <div class="big-number">
+          <div class="desc">Size:</div>
+          {{ sws }} sws
+        </div>
+        <div class="big-number">
+          <div class="desc">Semester:</div>
+          {{ semester }}
+        </div>
+        <div class="big-number">
+          <div class="desc">Language:</div>
+          {{ lang }}
+        </div>
+      </div>
       <el-button @click="open" size="small" icon="el-icon-office-building">
         Open subject's homepage
       </el-button>
@@ -21,11 +39,13 @@ export default Vue.extend({
   name: 'RecommendedSubjectC',
   props: {
     tags: Array,
-    subjectName: String,
+    name: String,
     url: String,
     sws: Number,
-    subjectType: String,
-    index: Number
+    type: String,
+    index: Number,
+    semester: String,
+    lang: String
   },
   computed: {
     image() {
@@ -33,7 +53,7 @@ export default Vue.extend({
       if (this.index === 0) {
         return 'coin';
       }
-      return `spiral-${Math.floor(Math.random() * Math.floor(4)) + 1}`;
+      return `spiral-${Math.floor(Math.random() * Math.floor(7)) + 1}`;
     }
   },
   methods: {
@@ -49,6 +69,7 @@ export default Vue.extend({
   width: 450px;
   position: relative;
   z-index: 40;
+
   h2 {
     font-size: 37px;
     width: 89%;
@@ -57,24 +78,28 @@ export default Vue.extend({
     color: #2c3e50;
   }
 
-  .stick-bottom {
-    position: relative;
-    bottom: 0;
+  .tags {
+    padding-top: 10px;
+    padding-bottom: 20px;
   }
 
-  &.recommended {
-    border: 1px solid #eac374;
+  .details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    width: 50%;
 
-    h2 {
-      color: #eac374;
-      width: 89%;
-    }
+    div.big-number {
+      display: inline-block;
+      font-size: 25px;
+      padding: 0 10px 5px 0;
 
-    .el-tag,
-    .el-button:hover {
-      border: 1px solid #eac374;
-      background-color: #eac3743d;
-      color: #ab7300;
+      .desc {
+        font-size: 13px;
+      }
     }
   }
 
@@ -85,6 +110,33 @@ export default Vue.extend({
     z-index: -14;
   }
 
+  .el-button {
+    position: absolute;
+    bottom: 20px;
+  }
+
+  &.recommended {
+    border: 1px solid #eac374;
+
+    h2 {
+      color: #eac374;
+      width: 89%;
+    }
+
+    .big-number {
+      color: #eac374;
+      .desc {
+        color: #2c3e50;
+      }
+    }
+
+    .el-tag,
+    .el-button:hover {
+      border: 1px solid #eac374;
+      background-color: #eac3743d;
+      color: #ab7300;
+    }
+  }
   @media (max-width: 500px) {
     img {
       width: 120px;
