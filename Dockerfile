@@ -16,13 +16,19 @@ RUN npm install
 # copy source files
 COPY . .
 
-# api for backend url
+# api for backend url & url
 ARG api_url
 ENV VUE_APP_API_URL=$api_url
 
-# api for backend port
 ARG api_port
 ENV VUE_APP_API_PORT=$api_port
+
+# api for recomendation service url & port
+ARG reco_url
+ENV VUE_APP_RECO_URL=$reco_url
+
+ARG reco_port
+ENV VUE_APP_RECO_PORT=$reco_port
 
 # build app
 RUN yarn bmodern

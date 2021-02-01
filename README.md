@@ -20,6 +20,8 @@ perform following steps:
 1. Create `.env` file and define following in it:
     - `VUE_APP_API_URL` - Url of your backend endpoint
     - `VUE_APP_API_PORT` - Port of your backend endpoint
+    - `VUE_APP_RECO_URL` - Url of your recommendation endpoint
+    - `VUE_APP_RECO_PORT` - Port of your recommendation endpoint
 1. Done.
 
 ## Production
@@ -34,6 +36,8 @@ Follow these steps to create production-ready build. You will need [docker](http
     docker build \
     --build-arg api_url="http://localhost" \
     --build-arg api_port="8080" \
+    --build-arg reco_url="http://localhost" \
+    --build-arg reco_port="2000" \
     -t recofach-frontend .
     ```
 
