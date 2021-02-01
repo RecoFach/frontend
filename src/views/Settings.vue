@@ -32,7 +32,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import axios from 'axios';
+
 import SettingsForm from '@/components/forms/Settings.vue';
 import ChangePasswordForm from '@/components/forms/ChangePassword.vue';
 import DeleteAccountForm from '@/components/forms/DeleteAccount.vue';
@@ -43,38 +43,6 @@ export default Vue.extend({
     SettingsForm,
     ChangePasswordForm,
     DeleteAccountForm
-  },
-  data() {
-    return {
-      form: {
-        name: '',
-        surname: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
-      }
-    };
-  },
-  methods: {
-    onSubmit() {
-      const user = '';
-      const userEmail = `${user}`;
-
-      axios
-        .delete(`http://localhost:8080/users/`, {
-          data: {
-            email: userEmail
-          }
-        })
-        .then(() => {
-          alert('User deleted sucessfully!');
-          window.location.href = '/login';
-        });
-    }
   }
 });
 </script>

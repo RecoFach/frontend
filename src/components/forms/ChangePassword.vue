@@ -39,10 +39,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import axios from 'axios';
-
-import { SIGNUP } from '@/store/routes';
 import { mapState } from 'vuex';
+import { USER_UPDATE_PASSWORD } from '@/store/actions/user';
 
 export default Vue.extend({
   name: 'ChangePasswordCF',
@@ -84,11 +82,10 @@ export default Vue.extend({
   methods: {
     onSubmit() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const elform: any = this.$refs.form;
-      console.log(typeof elform);
-      elform.validate((valid: boolean) => {
+      const { form }: any = this.$refs;
+      form.validate((valid: boolean) => {
         if (valid) {
-          console.log('Submiting valid form..');
+          console.log('Submitting password form..');
           this.sendForm();
         } else {
           console.log('Form is not valid');
@@ -98,23 +95,24 @@ export default Vue.extend({
 
     sendForm() {
       const {
-        form: { username, password }
+        form: { password },
+        currentUsername
       } = this.$data;
 
       this.$data.loading = true;
-      axios
-        .put(`${SIGNUP}`, { username, password })
+      this.$store
+        .dispatch(USER_UPDATE_PASSWORD, { username: currentUsername, password })
         .then((response) => {
           console.log(response);
           this.$message.success({
-            message: `Congrats, ${response.data.username}, your account was created!`,
+            message: `Hey, ${response.data.username}, your is password updated`,
             duration: 5000,
             showClose: true
           });
         })
         .catch((e) => {
           this.$message.error({
-            message: 'Sorry, this username was already taken :(',
+            message: 'Sorry, something went wrong :(',
             duration: 5000,
             showClose: true
           });

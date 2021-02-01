@@ -137,10 +137,10 @@ export default Vue.extend({
   methods: {
     onSubmit() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const elform: any = this.$refs.form;
-      elform.validate((valid: boolean) => {
+      const { form }: any = this.$refs;
+      form.validate((valid: boolean) => {
         if (valid) {
-          console.log('Submiting valid form..');
+          console.log('Submitting settings form..');
           this.sendForm();
         } else {
           console.log('Form is not valid');
