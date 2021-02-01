@@ -1,8 +1,8 @@
 <template>
   <div class="recommendations">
     <h2>Recommendations</h2>
-    <p>Here you can select your <b>favorite topics</b> to study</p>
-    <el-row :gutter="20" type="flex">
+    <p>Here you can see some recommendations based on your <b>interests</b>.</p>
+    <el-row :gutter="20" type="flex" v-if="this.$store.getters.isProfileLoaded">
       <RecommendedSubject
         v-loading="loading"
         v-for="(subject, index) in subjects"
@@ -65,18 +65,55 @@ export default {
       ]
     };
   },
-  mounted() {
-    const listOfRecommendations = Array;
-    axios.post(`${RECOMMENDATION}`, {
-      params: {
-        'Software engineering': this.user.profile.interests.includes('SOFTWARE') ? 1 : 0,
+  created() {
+    axios
+      .post(`${RECOMMENDATION}`, {
+        SOFTWARE: this.user.profile.interests.includes('SOFTWARE') ? 1 : 0,
         AI: this.user.profile.interests.includes('AI') ? 1 : 0,
-        'Low-level': this.user.profile.interests.includes('LOWLEVEL') ? 1 : 0,
-        Security: this.user.profile.interests.includes('SECURITY') ? 1 : 0,
-        Web: this.user.profile.interests.includes('WEB') ? 1 : 0,
-        Theoretical: this.user.profile.interests.includes('THEORETICAL') ? 1 : 0
-      }
-    });
+        LOWLEVEL: this.user.profile.interests.includes('LOWLEVEL') ? 1 : 0,
+        SECURITY: this.user.profile.interests.includes('SECURITY') ? 1 : 0,
+        WEB: this.user.profile.interests.includes('WEB') ? 1 : 0,
+        THEORETICAL: this.user.profile.interests.includes('THEORETICAL') ? 1 : 0
+      })
+      .then((resp) => {
+        console.log(resp);
+        console.log(this.mapper(resp.data));
+        this.$data.subjects = this.mapper(resp.data);
+      })
+      .finally(() => {
+        this.$data.loading = false;
+      });
+  },
+  methods: {
+    mapper(d) {
+      const data = [];
+      Object.entries(d).forEach((c) => {
+        const course = c[1];
+        data.push({
+          name: course['Course name'].replace(/[\u{0080}-\u{FFFF}]/gu, ''),
+          url: course.Link,
+          sws: course.sws,
+          type: this.detectType(course),
+          tags: this.detectTags(course)
+        });
+      });
+      return data;
+    },
+    detectType(course) {
+      if (course.Vorlesung === 1) return 'Lecture';
+      if (course.Seminar === 1) return 'Seminar';
+      return 'Praxis';
+    },
+    detectTags(course) {
+      const tags = [];
+      if (course.AI === 1) tags.push('AI');
+      if (course['Low-level'] === 1) tags.push('LOWLEVEL');
+      if (course['Software engineering'] === 1) tags.push('SOFTWARE');
+      if (course.Security === 1) tags.push('SECURITY');
+      if (course.Web === 1) tags.push('WEB');
+      if (course.Theoretical === 1) tags.push('THEORETICAL');
+      return tags;
+    }
   }
 };
 </script>

@@ -1,14 +1,16 @@
 <template>
   <el-card shadow="hover" class="subject" :class="{ recommended: index === 0 }">
     <h2>{{ subjectName }}</h2>
-    <el-tag v-if="index === 0">Recommended</el-tag>
-    <el-tag v-for="tag in tags" :type="tag" :key="tag.text">{{ tag }}</el-tag>
-    <img :src="require('@/assets/' + image + '.jpg')" width="245" alt="image" />
-    <p>Number of SWS: {{ sws }}</p>
-    <p>Type: {{ subjectType }}</p>
-    <el-button @click="open" size="small" icon="el-icon-office-building">
-      Open subject's homepage
-    </el-button>
+    <div class="stick-bottom">
+      <el-tag v-if="index === 0">Recommended</el-tag>
+      <el-tag v-for="tag in tags" :type="tag" :key="tag.text">{{ tag }}</el-tag>
+      <img :src="require('@/assets/' + image + '.jpg')" width="245" alt="image" />
+      <p>Number of SWS: {{ sws }}</p>
+      <p>Type: {{ subjectType }}</p>
+      <el-button @click="open" size="small" icon="el-icon-office-building">
+        Open subject's homepage
+      </el-button>
+    </div>
   </el-card>
 </template>
 
@@ -34,15 +36,6 @@ export default Vue.extend({
       return `spiral-${Math.floor(Math.random() * Math.floor(4)) + 1}`;
     }
   },
-  data() {
-    return {
-      // subjectName: String,
-      // url: String,
-      // sws: String,
-      // subjectType: String,
-      // area: Array
-    };
-  },
   methods: {
     open() {
       window.open(this.url, '_blank');
@@ -55,11 +48,18 @@ export default Vue.extend({
 .subject {
   width: 450px;
   position: relative;
+  z-index: 40;
   h2 {
     font-size: 37px;
+    width: 89%;
     margin-top: 10px;
     margin-bottom: 10px;
     color: #2c3e50;
+  }
+
+  .stick-bottom {
+    position: relative;
+    bottom: 0;
   }
 
   &.recommended {
@@ -67,6 +67,7 @@ export default Vue.extend({
 
     h2 {
       color: #eac374;
+      width: 89%;
     }
 
     .el-tag,
@@ -81,6 +82,7 @@ export default Vue.extend({
     position: absolute;
     bottom: -42px;
     right: -50px;
+    z-index: -14;
   }
 
   @media (max-width: 500px) {
