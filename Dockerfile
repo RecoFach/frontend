@@ -34,7 +34,7 @@ ENV VUE_APP_RECO_PORT=$reco_port
 RUN yarn run lint --fix
 
 # build app
-RUN yarn bmodern
+RUN yarn build
 
 # run app
 EXPOSE 3000
