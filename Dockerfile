@@ -30,6 +30,9 @@ ENV VUE_APP_RECO_URL=$reco_url
 ARG reco_port
 ENV VUE_APP_RECO_PORT=$reco_port
 
+# fix linting
+RUN yarn run lint --fix
+
 # build app
 RUN yarn bmodern
 
